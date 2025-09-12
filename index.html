@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yum Studio</title>
+  <link rel="stylesheet" href="assets/style/yum-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- HERO / HEADER -->
+<header>
+  <h1>Yum Studio</h1>
+  <p>Creating immersive worlds, one game at a time.</p>
+  <a href="projects.html" class="btn">View Projects</a>
+</header>
+
+<!-- PROJECTS TEASER -->
+<section id="featured-projects">
+  <h2>Featured Projects</h2>
+  <div class="downloads-container">
+    <div class="download-card">
+      <!--<img src="https://via.placeholder.com/80" alt="Project 1">-->
+      <h3>YumEngine</h3>
+      <p>YumEngine — Unleash Lua in Godot. Custom C/C++ interface + CLI tools for seamless, next-level game scripting.</p>
+      <a href="https://yumstudiohq.github.io/YumEngine" class="btn">Visit Project</a>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Our Team</h2>
+  <div class="devs-container" id="devs-container">
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 Yum Studio. All Rights Reserved. <a href="projects.html">Projects</a> | <a href="index.html">Home</a></p>
+</footer>
+
+</body>
+
+<script>
+const jsonURL = 'assets/json/devs.json';
+
+const container = document.getElementById('devs-container');
+
+fetch(jsonURL)
+  .then(response => response.json())
+  .then(devs => {
+    devs.forEach(dev => {
+      const card = document.createElement('div');
+      card.className = 'dev-card';
+      card.innerHTML = `
+        <a href="${dev.github}" target="_blank">
+          <img src="${dev.pfp}" alt="${dev.name}">
+        </a>
+        <h3>${dev.name}</h3>
+        <p>${dev.type}</p>
+      `;
+      container.appendChild(card);
+    });
+  })
+  .catch(err => console.error('Error loading devs:', err));
+</script>
+</html>
