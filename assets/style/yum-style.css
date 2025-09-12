@@ -1,12 +1,17 @@
 /* VARIABLES */
 :root {
-  --colorBackground: #0A0D14;      /* abyss-black */
-  --colorPrimary: #884D50;         /* cordovan red */
-  --colorSecondary: #7A4FFF;       /* royal violet */
-  --colorAccent: #4FF1E8;          /* neon cyan */
-  --colorHighlight: #E3B7B7;       /* tea-rose-red */
-  --colorLight: #F2ECEC;           /* soft-shell */
-  --colorExtraLight: #FFFFFF;      /* pure white */
+  /* Deep / background tones */
+  --colorBackground: #0C0B10;     /* very dark, almost black with a tint */
+  --colorShadow:     #1E1C24;     /* dark greyish purple-black */
+
+  /* Base Rosy / Hair / Primary */
+  --colorPrimary:    #C34A58;     /* a vivid rosy-red, strong but not neon */
+  --colorSecondary:  #662D36;     /* deeper dark red, for accents & borders */
+
+  /* Highlights & glow / lighter accents */
+  --colorAccent:     #F1AFAF;     /* light rose / pink highlight */
+  --colorLight:      #F9EDEA;     /* pale, almost soft skin / light rose */
+  --colorExtraLight: #FFFFFF;     /* white pure, for text pops, glows */
 }
 
 /* RESET & BASE */
