@@ -1,121 +1,132 @@
+/* === COLOR PALETTE ====================================== */
 :root {
-  /* Refined Palette */
-  --colorBackground: #0D0D0F;   /* deep obsidian black */
-  --colorPrimary:    #C44569;   /* rosy crimson */
-  --colorSecondary:  #2B2E3C;   /* muted steel gray */
-  --colorAccent:     #F5A9B8;   /* soft rose highlight */
-  --colorLight:      #EAEAEA;   /* neutral light gray */
-  --colorExtraLight: #FFFFFF;   /* pure white */
+  /* Astral Pulse Palette */
+  --colorBackground: #0B0E13;   /* Deep void */
+  --colorPrimary:    #4B91F1;   /* Godot blue glow */
+  --colorSecondary:  #1A1F2B;   /* Cool dark base */
+  --colorAccent:     #FF7DD1;   /* ZZZ pink accent */
+  --colorHighlight:  #B4E1FF;   /* Frosty blue-white */
+  --colorLight:      #E8F0FF;   /* Soft light */
+  --colorExtraLight: #FFFFFF;   /* Pure white */
+
+  /* Shadows / Transparency */
+  --shadowGlow: 0 0 15px rgba(75,145,241,0.6),
+                 0 0 25px rgba(255,125,209,0.4);
+  --glass: rgba(26, 31, 43, 0.65);
 }
 
-/* RESET & BASE */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* === RESET + BASE ======================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Exo 2', 'Poppins', sans-serif;
   background: var(--colorBackground);
   color: var(--colorLight);
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--colorAccent);
+}
 
-/* HEADER / HERO */
+/* === HERO / HEADER ====================================== */
 header {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  text-align: center;
   background: linear-gradient(
     135deg,
     var(--colorPrimary),
     var(--colorSecondary),
     var(--colorAccent),
-    var(--colorLight),
-    var(--colorExtraLight)
+    var(--colorHighlight)
   );
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  text-align: center;
+  animation: gradientShift 18s ease infinite;
   position: relative;
   overflow: hidden;
 }
+
 header::before {
   content: '';
   position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-  animation: rotateBG 60s linear infinite;
   top: -50%;
   left: -50%;
-  z-index: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: rotateBG 80s linear infinite;
 }
+
 header h1 {
-  position: relative;
   font-size: 4rem;
   color: var(--colorLight);
   text-shadow:
     0 0 6px var(--colorAccent),
     0 0 12px var(--colorPrimary),
-    0 0 25px var(--colorSecondary);
-  animation: flicker 2s infinite;
+    0 0 30px var(--colorAccent);
+  animation: flicker 2.5s infinite;
   z-index: 1;
-}
-header p {
-  position: relative;
-  margin-top: 20px;
-  font-size: 1.3rem;
-  color: var(--colorAccent);
-  text-shadow: 0 0 5px var(--colorSecondary);
-  z-index: 1;
-}
-.tech span {
-  font-weight: bold;
-  text-shadow: 0 0 10px var(--colorSecondary), 0 0 20px var(--colorPrimary);
-  animation: glow 2s infinite alternate;
-  margin: 0 5px;
 }
 
-/* SECTIONS */
+header p {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: var(--colorHighlight);
+  text-shadow: 0 0 6px var(--colorPrimary);
+  z-index: 1;
+}
+
+/* === SECTION BASE ======================================= */
 section {
   padding: 100px 20px;
   text-align: center;
   position: relative;
-  z-index: 1;
 }
 section h2 {
-  font-size: 2.2rem;
-  margin-bottom: 40px;
+  font-size: 2.4rem;
   color: var(--colorAccent);
-  text-shadow: 0 0 6px var(--colorAccent), 0 0 15px var(--colorPrimary);
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px var(--colorAccent), 0 0 20px var(--colorPrimary);
 }
 section p {
   max-width: 850px;
   margin: 0 auto 25px;
   line-height: 1.7;
   color: var(--colorLight);
-  text-shadow: 0 0 2px var(--colorExtraLight);
 }
 
-/* BUTTONS */
+/* === BUTTONS ============================================ */
 .btn {
   display: inline-block;
-  margin-top: 25px;
   padding: 14px 28px;
-  font-weight: bold;
-  color: var(--colorLight);
+  margin-top: 25px;
   border: 2px solid var(--colorAccent);
-  border-radius: 12px;
+  border-radius: 14px;
   background: linear-gradient(120deg, transparent, rgba(255,255,255,0.05));
+  color: var(--colorLight);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 .btn:hover {
-  background: var(--colorPrimary);
+  background: linear-gradient(135deg, var(--colorPrimary), var(--colorAccent));
   color: var(--colorExtraLight);
-  box-shadow: 0 0 25px var(--colorPrimary), 0 0 50px var(--colorAccent);
+  box-shadow: var(--shadowGlow);
 }
 .btn::after {
   content: '';
@@ -130,8 +141,141 @@ section p {
 }
 .btn:hover::after { left: 100%; }
 
-/* KEYFRAMES */
-@keyframes gradientBG {
+/* === DEV CARDS ========================================== */
+.devs-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;  /* centers the row horizontally */
+  align-items: center;      /* vertically centers if multiple rows */
+  gap: 40px;                /* more breathing room between cards */
+  max-width: 1200px;        /* keeps them from stretching too far */
+  margin: 0 auto;           /* centers the whole container on the page */
+  padding: 20px;
+}
+.dev-card {
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  border: 2px solid var(--colorPrimary);
+  border-radius: 16px;
+  padding: 25px;
+  width: 240px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* center avatar + text horizontally */
+  justify-content: center;
+  text-align: center;
+}
+.dev-card:hover {
+  transform: translateY(-12px) rotateZ(-1deg);
+  box-shadow: var(--shadowGlow);
+}
+.dev-card img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 2px solid var(--colorAccent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dev-card img:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadowGlow);
+}
+.dev-card h3 {
+  color: var(--colorHighlight);
+  text-shadow: 0 0 10px var(--colorPrimary);
+}
+.dev-card p {
+  color: var(--colorLight);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* === BADGES ============================================= */
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  margin: 5px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--colorPrimary), var(--colorAccent));
+  color: var(--colorLight);
+  font-weight: bold;
+  text-shadow: 0 0 6px var(--colorHighlight);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.badge:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadowGlow);
+}
+
+/* === DOWNLOAD CARDS ===================================== */
+.downloads-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+.download-card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--colorPrimary);
+  border-radius: 16px;
+  padding: 25px;
+  width: 260px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.download-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadowGlow);
+}
+.download-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 2px solid var(--colorAccent);
+  transition: transform 0.3s ease;
+}
+.download-card img:hover {
+  transform: scale(1.1);
+}
+.download-card h3 {
+  color: var(--colorHighlight);
+  margin-bottom: 10px;
+}
+.download-card p {
+  color: var(--colorLight);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* === FOOTER ============================================= */
+footer {
+  padding: 60px 20px;
+  background: var(--colorSecondary);
+  text-align: center;
+  color: var(--colorLight);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+footer a {
+  color: var(--colorAccent);
+  text-shadow: 0 0 3px var(--colorAccent);
+}
+
+/* === KEYFRAMES ========================================== */
+@keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -141,151 +285,6 @@ section p {
   100% { transform: rotate(360deg); }
 }
 @keyframes flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-  20%, 24%, 55% { opacity: 0.3; }
-}
-@keyframes glow {
-  from { text-shadow: 0 0 10px var(--colorPrimary), 0 0 20px var(--colorSecondary); }
-  to { text-shadow: 0 0 20px var(--colorPrimary), 0 0 40px var(--colorSecondary), 0 0 60px var(--colorAccent); }
-}
-
-/* DEV CARDS */
-.devs-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
-.dev-card {
-  background: var(--colorSecondary);
-  border: 2px solid var(--colorPrimary);
-  border-radius: 16px;
-  padding: 25px;
-  width: 220px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.dev-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-  animation: rotateBG 80s linear infinite;
-  z-index: 0;
-}
-.dev-card:hover {
-  transform: translateY(-12px) rotateZ(-1deg);
-  box-shadow: 0 0 25px var(--colorPrimary), 0 0 50px var(--colorAccent), 0 0 75px var(--colorPrimary);
-}
-.dev-card img {
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 12px;
-  border: 2px solid var(--colorPrimary);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.dev-card img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px var(--colorAccent), 0 0 30px var(--colorPrimary);
-}
-
-/* BADGES */
-.badge {
-  display: inline-block;
-  padding: 6px 14px;
-  margin: 5px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--colorPrimary), var(--colorAccent));
-  color: var(--colorLight);
-  font-weight: bold;
-  text-shadow: 0 0 5px var(--colorLight);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.badge:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 0 10px var(--colorPrimary), 0 0 20px var(--colorAccent);
-}
-
-/* FOOTER */
-footer {
-  padding: 50px 20px;
-  background: var(--colorSecondary);
-  color: var(--colorLight);
-  text-align: center;
-  font-size: 0.9rem;
-}
-footer a {
-  color: var(--colorAccent);
-  text-shadow: 0 0 3px var(--colorAccent);
-}
-
-/* DOWNLOADS */
-#downloads {
-  padding: 100px 20px;
-  text-align: center;
-  background: var(--colorSecondary);
-}
-.downloads-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-.download-card {
-  background: var(--colorSecondary);
-  border: 2px solid var(--colorPrimary);
-  border-radius: 16px;
-  padding: 25px;
-  width: 250px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.download-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-  animation: rotateBG 80s linear infinite;
-  z-index: 0;
-}
-.download-card:hover {
-  transform: translateY(-12px) rotateZ(-1deg);
-  box-shadow: 0 0 25px var(--colorPrimary), 0 0 50px var(--colorAccent), 0 0 75px var(--colorPrimary);
-}
-.download-card img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  border: 2px solid var(--colorPrimary);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.download-card img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px var(--colorAccent), 0 0 30px var(--colorPrimary);
-}
-.download-card h3 {
-  color: var(--colorAccent);
-  margin-bottom: 10px;
-  text-shadow: 0 0 6px var(--colorAccent), 0 0 12px var(--colorPrimary);
-}
-.download-card p {
-  color: var(--colorLight);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 15px;
-  text-shadow: 0 0 2px var(--colorLight);
-}
-.download-card .btn {
-  font-size: 0.9rem;
-  padding: 10px 20px;
+  0%, 19%, 21%, 60%, 62%, 100% { opacity: 1; }
+  20%, 61% { opacity: 0.4; }
 }
