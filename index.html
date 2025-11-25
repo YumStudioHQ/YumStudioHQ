@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YumStudio — Different</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="pixels">
+      <h1>YumStudio — Different.</h1>
+      <select id="filter">
+        <option value="all">All Languages</option>
+      </select>
+
+      <div id="projects">
+        <p>Loading projects...</p>
+      </div>
+
+    </div>
+
+    <script>
+      const languageIcons = {
+        JavaScript:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        Python:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        HTML: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+        CSS: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+        "C++":
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+        "C#": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+        C: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+        Lua: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg",
+        // Add more languages as you like
+      };
+
+      async function loadProjects() {
+        const res = await fetch(
+          "https://api.github.com/users/yumstudiohq/repos"
+        );
+        const repos = await res.json();
+
+        const projectsContainer = document.getElementById("projects");
+        const filterSelect = document.getElementById("filter");
+
+        // Get unique languages
+        const languages = [
+          ...new Set(repos.map((r) => r.language).filter(Boolean)),
+        ];
+        languages.forEach((lang) => {
+          const option = document.createElement("option");
+          option.value = lang;
+          option.textContent = lang;
+          filterSelect.appendChild(option);
+        });
+
+        function render(filterLang = "all") {
+          const filtered =
+            filterLang === "all"
+              ? repos
+              : repos.filter((r) => r.language === filterLang);
+
+          projectsContainer.innerHTML = filtered
+            .map((repo) => {
+              return `
+        <div class="project-card">
+          <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+          <div class="project-info">
+            ${
+              repo.language
+                ? `<img src="${languageIcons[repo.language] || ""}" alt="${
+                    repo.language
+                  }">${repo.language}`
+                : "N/A"
+            }
+          </div>
+          <div class="project-info">
+            ⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count}
+          </div>
+          <div class="project-info">
+            ${repo.description || "No description"}
+          </div>
+          <div class="project-info" id="contributors-${repo.name.replace(
+            /\s/g,
+            "-"
+          )}" style="margin-top:5px;"></div>
+        </div>
+        `;
+            })
+            .join("");
+
+          // Fetch contributors
+          filtered.forEach((repo) => {
+            fetch(repo.contributors_url)
+              .then((res) => res.json())
+              .then((contribs) => {
+                const div = document.getElementById(
+                  `contributors-${repo.name.replace(/\s/g, "-")}`
+                );
+                if (contribs.length > 0) {
+                  div.innerHTML = contribs
+                    .map(
+                      (c) =>
+                        `<img src="${c.avatar_url}" title="${c.login}" style="width:20px; height:20px; border-radius:50%; margin-right:2px;">`
+                    )
+                    .join("");
+                } else {
+                  div.innerHTML = "No contributors yet";
+                }
+              });
+          });
+        }
+
+        filterSelect.addEventListener("change", (e) => render(e.target.value));
+        render();
+      }
+
+      loadProjects();
+
+      // Generate floating pixels
+      const pixelsContainer = document.getElementById("pixels");
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement("div");
+        p.classList.add("pixel");
+        p.style.left = Math.random() * window.innerWidth + "px";
+        p.style.top = Math.random() * window.innerHeight + "px";
+        p.style.animationDuration = 3 + Math.random() * 5 + "s";
+        pixelsContainer.appendChild(p);
+      }
+    </script>
+  </body>
+</html>
+

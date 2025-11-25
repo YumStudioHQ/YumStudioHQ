@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #1e1e2f;
+  color: #f0f0f0;
+  font-family: "VT323", monospace;
+  overflow-x: hidden;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  margin-top: 2rem;
+  color: #ff99cc;
+  text-shadow: 1px 1px #330033;
+}
+
+#projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.project-card {
+  background: rgba(50, 50, 70, 0.8);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 250px;
+  backdrop-filter: blur(5px);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px #ff99cc;
+}
+
+.project-card a {
+  color: #ffccff;
+  text-decoration: none;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+.project-card img {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.project-info {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+#filter {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+}
+
+/* Floating pixels / soft fog effect */
+.pixel {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ff99cc;
+  opacity: 0.6;
+  animation: float 6s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(5px);
+  }
+  100% {
+    transform: translateY(0) translateX(-5px);
+  }
+}
